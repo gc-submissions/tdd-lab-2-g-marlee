@@ -1,4 +1,4 @@
-const {calculateChange, isSufficientPayment, calculateTotal} = require("../src/js/cart-functions");
+const {calculateChange, isSufficientPayment, calculateTotal, addItem, removeItem} = require("../src/js/cart-functions");
 
 describe("calculateChange", () => {
   test("When payment is 6 and total is 5 then our change is 1", () => {
@@ -102,9 +102,68 @@ describe("calculateTotal", () => {
 });
 
 describe("addItem", () => {
-  test.todo("add addItem tests here");
+  test("Adding beans to empty array", () => {
+    const itemsArray = [];
+    addItem(itemsArray, "Beans", 3);
+
+    expect(itemsArray).toContainEqual({name: "Beans", price: 3});
+  });
+
+  test("Check that item is added to array", () => {
+    const itemsArray = [{name: "Beans", price: 3}];
+
+    addItem(itemsArray, "Sugar", 2);
+
+    expect(itemsArray).toContainEqual({name: "Sugar", price: 2});
+  });
+
+  test("Check that item is added to array", () => {
+    const itemsArray = [{name: "Beans", price: 3}, 
+                        {name: "Avocado", price: 1},
+                        {name: "Chips", price: 3}];
+
+    addItem(itemsArray, "Sugar", 2);
+
+    expect(itemsArray).toContainEqual({name: "Sugar", price: 2});
+  });
 });
 
 describe("removeItem", () => {
-  test.todo("add removeItem tests here");
+  test("Removes item from array", () => {
+    const itemsArray = [{name: "Beans", price: 3}, 
+                        {name: "Avocado", price: 1},
+                        {name: "Chips", price: 3}];
+
+    removeItem(itemsArray, 0);
+
+    expect(itemsArray).not.toContainEqual({name: "Beans", price: 3});
+  });
+
+  test("Removes item from array", () => {
+    const itemsArray = [{name: "Beans", price: 3}, 
+                        {name: "Avocado", price: 1},
+                        {name: "Chips", price: 3}];
+
+    removeItem(itemsArray, 2);
+
+    expect(itemsArray).not.toContainEqual({name: "Chips", price: 3});
+  });
+
+  test("Removes item from array", () => {
+    const itemsArray = [{name: "Beans", price: 3}, 
+                        {name: "Avocado", price: 1},
+                        {name: "Chips", price: 3}];
+
+    removeItem(itemsArray, 1);
+
+    expect(itemsArray).not.toContainEqual({name: "Avocado", price: 1});
+  });
+
+  test("Removes item from array", () => {
+    const itemsArray = [{name: "Beans", price: 3}];
+
+    removeItem(itemsArray, 0);
+
+    expect(itemsArray).not.toContainEqual({name: "Beans", price: 3});
+  });
 });

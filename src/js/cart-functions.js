@@ -17,4 +17,13 @@ function calculateTotal(itemsArray) {
     return total;
 };
 
-module.exports = {calculateChange, isSufficientPayment, calculateTotal};
+function addItem(itemsArray, name, price) {
+    const object = {name: name, price: price};
+    itemsArray.push(object);
+};
+
+function removeItem(itemsArray, index) {
+    itemsArray.splice(index, 1);
+};
+
+module.exports = {calculateChange, isSufficientPayment, calculateTotal, addItem, removeItem};
