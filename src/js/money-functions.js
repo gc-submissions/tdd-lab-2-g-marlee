@@ -23,7 +23,7 @@ function getCoins(cents) {
         } else if (cents >= 5 && cents < 10) {
             nickels++;
             cents -= 5;
-        } else if (cents >= 1 && cents < 4) {
+        } else {
             pennies++;
             cents -= 1;
         }
